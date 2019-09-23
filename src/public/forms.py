@@ -44,3 +44,18 @@ class secti(Form):
 class masoform(Form):
     typ=SelectField('Typ', choices=[(1, "Hovezi"), (2, "Veprove")], default=2)
 
+class vstupnitestform(Form):
+
+    Jmeno = TextField('Vase jmeno:', validators=[
+        Length(min=3, max=30, message="3 az 30 znaku "),
+        InputRequired(message="vyzadovano")
+    ])
+    otazka1 = IntegerField('Vyreste (1 + 2 + 4 + 8 + 2 + 516456 + 148 - 1848 - 190 + 14) * 0',validators=[
+        InputRequired(message="vyzadovano")
+    ])
+    otazka2 = IntegerField('Ktery rok byl 11. zari 2019',validators=[
+        InputRequired(message="vyzadovano")
+    ])
+    otazka3 = TextField('Opiste text: JELITO',validators=[
+        InputRequired(message="vyzadovano")
+    ])
