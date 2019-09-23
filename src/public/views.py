@@ -72,3 +72,24 @@ def nactenijson():
     for radek in json_res["list"]:
         print radek["main"]['temp']
     return jsonify(json_res)
+
+
+@blueprint.route("/simple_chart")
+def chart():
+    from flask import jsonify
+    import requests, os
+    os.environ['NO_PROXY'] = '127.0.0.1'
+    proxies = {
+        "http": None,
+        "https": "http://192.168.1.1:800",
+    }
+    response = requests.get("http://192.168.10.1:5000/nactenijson", proxies=proxies)
+    legend = 'Monthly Data'
+    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
+    values = []
+    json_res = response.json()
+    for radek in json_res["list"]:
+        values.append(radek["main"]['temp'])
+
+    return render_template('public/chart.tmpl', values=values, labels=labels, legend=legend)
+
