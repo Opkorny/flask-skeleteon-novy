@@ -6,10 +6,11 @@
 {% block content %}
   <h3>Vstupni test</h3>
   <form method="POST" id='insert-form'>
-      {{ render_input_field(form.Jmeno) }}
-      {{ render_input_field(form.otazka1) }}
-      {{ render_input_field(form.otazka2) }}
-      {{ render_input_field(form.otazka3) }}
-      {{ render_submit() }}
+    {{ form.hidden_tag() }}
+    {{ render_input_field(form.Jmeno) }}
+    {{ render_input_field(form.otazka1) }}
+    {{ render_input_field(form.otazka2) }}
+    {{ render_input_field(form.otazka3) }}
+    {{ render_submit() }}
   </form>
 {% endblock %}
