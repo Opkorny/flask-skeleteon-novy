@@ -85,11 +85,12 @@ def chart():
     }
     response = requests.get("http://192.168.10.1:5000/nactenijson", proxies=proxies)
     legend = 'Monthly Data'
-    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
+    labels = []
     values = []
     json_res = response.json()
     for radek in json_res["list"]:
         values.append(radek["main"]['temp'])
+        labels.append(radek["dt_txt"]) 
 
     return render_template('public/chart.tmpl', values=values, labels=labels, legend=legend)
 
