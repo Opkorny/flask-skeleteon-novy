@@ -59,3 +59,7 @@ class vstupnitestform(Form):
     otazka3 = TextField('Opiste text: JELITO',validators=[
         InputRequired(message="vyzadovano")
     ])
+
+class ValidateParent(Form):
+    prijmeni = TextField("Prijmeni",validators=[InputRequired(message="vyzadovano")])
+    pohlavi = IntegerField("Pohlavi",validators=[InputRequired])
