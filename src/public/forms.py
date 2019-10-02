@@ -66,4 +66,4 @@ class ValidateParent(Form):
 
 class ValidateChild(Form):
     parent_id = SelectField(choices=[])
-    jmeno = TextField("Prijmeni",validators=[InputRequired(message="vyzadovano")])
+    jmeno = TextField("Jmeno",validators=[InputRequired(message="vyzadovano")])
