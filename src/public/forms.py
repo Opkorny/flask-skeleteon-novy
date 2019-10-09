@@ -28,12 +28,12 @@ class LogUserForm(Form):
 
     jmeno = TextField('Choose your username', validators=[
         Predicate(safe_characters, message="Please use only letters (a-z) and numbers"),
-        Length(min=6, max=30, message="Please use between 6 and 30 characters"),
+        Length(min=3, max=30, message="Please use between 6 and 30 characters"),
         InputRequired(message="You can't leave this empty")
     ])
     prijmeni = TextField('Choose your username', validators=[
         Predicate(safe_characters, message="Please use only letters (a-z) and numbers"),
-        Length(min=6, max=30, message="Please use between 6 and 30 characters"),
+        Length(min=3, max=30, message="Please use between 6 and 30 characters"),
         InputRequired(message="You can't leave this empty")
     ])
     pohlavi = BooleanField('Pohlavi')
@@ -67,3 +67,11 @@ class ValidateParent(Form):
 class ValidateChild(Form):
     parent_id = SelectField(choices=[])
     jmeno = TextField("Jmeno",validators=[InputRequired(message="vyzadovano")])
+
+class Vehicle(Form):
+    typ = TextField("Typ vozidla:", validators=[InputRequired(message="vyzadovano")])
+    spz = TextField("SPZ: (7-9 znaku)",validators=[
+        InputRequired(message="vyzadovano"),
+        Predicate(safe_characters, message="Prosim pouzijte pouze (a-z) a cisla"),
+        Length(min=7, max=9, message="Pouze 7-9 znaku")
+    ])

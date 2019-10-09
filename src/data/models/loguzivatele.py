@@ -10,8 +10,8 @@ class LogUser(CRUDModel):
     __tablename__ = 'loguser'
     __table_args__ = {'sqlite_autoincrement': True}
     id = Column(Integer, primary_key=True )
-    Petr = Column(String, nullable=False, index=False)
-    Grussmann = Column(String, nullable=False, index=True)
+    jmeno = Column(String, nullable=False, index=False)
+    prijmeni = Column(String, nullable=False, index=True)
     pohlavi = Column(Boolean(name="zena"), default=False)
     datum_insertu= Column(DateTime)
 
@@ -25,7 +25,7 @@ class LogUser(CRUDModel):
             setattr(self, k, v)
     @staticmethod
     def find_by_prijmeni(prijmeni):
-        return db.session.query(LogUser).filter_by(Grussmann = prijmeni).all()
+        return db.session.query(LogUser).filter_by(prijmeni = prijmeni).all()
 
 class Child(CRUDModel):
     __tablename__ = 'child'

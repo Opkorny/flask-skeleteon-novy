@@ -2,9 +2,9 @@
 Logic for dashboard related routes
 """
 from flask import Blueprint, render_template, flash
-from .forms import LogUserForm, secti,masoform,vstupnitestform, ValidateParent, ValidateChild
+from .forms import LogUserForm, secti,masoform,vstupnitestform, ValidateParent, ValidateChild, Vehicle
 from ..data.database import db
-from ..data.models import LogUser, Parent, Child
+from ..data.models import LogUser, Parent, Child, Vozidlo
 blueprint = Blueprint('public', __name__)
 
 @blueprint.route('/', methods=['GET'])
@@ -14,7 +14,7 @@ def index():
 @blueprint.route('/loguserinput',methods=['GET', 'POST'])
 def InsertLogUser():
     form = LogUserForm()
-    if form.validate_on_submit():
+    if form.is_submitted():
         LogUser.create(**form.data)
     return render_template("public/LogUser.tmpl", form=form)
 
@@ -110,3 +110,20 @@ def dite():
         Child.create(**form.data)
         flash(message="Ulozeno",category="info")
     return render_template('public/dite.tmpl', form=form)
+
+@blueprint.route('/vozidlo', methods=['GET','POST'])
+def vozidlo():
+    form = Vehicle()
+    try:
+        if form.validate_on_submit():
+            Vozidlo.create(**form.data)
+            pole = db.session.query(Vozidlo).all()
+            return render_template("public/vozidlavystup.tmpl", data=pole)
+    except:
+        flash(message="Error - dulplicitni spz",category="info")
+    return render_template('public/vozidlo.tmpl', form=form)
+
+@blueprint.route('/vozidlavystup',methods=['GET'])
+def vozidlaVystup():
+    pole = db.session.query(Vozidlo).all()
+    return render_template("public/vozidlavystup.tmpl", data=pole)
